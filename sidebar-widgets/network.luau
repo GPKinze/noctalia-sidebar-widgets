@@ -1,8 +1,10 @@
 --!nonstrict
 -- Network rates come from Noctalia systemStats().net (bytes per second).
 local WIDTH, INNER = 258, 226
-local WHITE, MUTED = "#dee0dc", "#b1bab7"
-local TEAL, BACK = "#48d6c4", "#101514e0"
+-- Use live Noctalia palette roles instead of fixed hex colors.
+local WHITE, MUTED = "on_surface", "on_surface_variant"
+local TEAL, BACK = "primary", "surface/0.88"
+local BORDER = "on_surface_variant/0.22"
 
 local function text(value, color, size)
     return ui.label({ text = value, color = color or WHITE, fontSize = size or 11,
@@ -22,7 +24,7 @@ function update()
     local stats = noctalia.systemStats()
     local net = stats and stats.net or nil
     desktopWidget.render(ui.column({ width = WIDTH, gap = 12, padding = 16,
-        fill = BACK, radius = 16, border = "#4c5d554a", borderWidth = 1 }, {
+        fill = BACK, radius = 16, border = BORDER, borderWidth = 1 }, {
         text("NETWORK", MUTED, 11),
         ui.row({ width = INNER, justify = "space_between" }, {
             text("↓ Download", WHITE), text(rate(net and net.rxBytesPerSec), MUTED),
