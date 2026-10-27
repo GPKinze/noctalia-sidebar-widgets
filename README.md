@@ -4,6 +4,16 @@ A collection of four compact, independently placeable desktop widgets for **Noct
 
 **Current release:** [v0.1.1-beta](https://github.com/GPKinze/noctalia-sidebar-widgets/releases/tag/v0.1.1-beta). Smoke-tested on CachyOS with Umbriel and Noctalia. Other hardware and Noctalia builds have not been fully tested.
 
+## Screenshots
+
+Three desktop screenshots showing the four sidebar widgets with different Noctalia palettes. These are the original PNG screenshots, unchanged.
+
+| Sunset | Mountains | City |
+| :---: | :---: | :---: |
+| [![Sidebar widgets with warm sunset palette](screenshots/Screenshot-2026-10-27_17-07-10.png)](screenshots/Screenshot-2026-10-27_17-07-10.png) | [![Sidebar widgets with cool mountain palette](screenshots/Screenshot-2026-10-27_17-06-59.png)](screenshots/Screenshot-2026-10-27_17-06-59.png) | [![Sidebar widgets with green-themed city palette](screenshots/Screenshot-2026-10-27_16-41-10.png)](screenshots/Screenshot-2026-10-27_16-41-10.png) |
+
+Select a screenshot to view the full-resolution desktop. Wallpapers are for demonstration and are not distributed separately.
+
 ## Widgets
 
 | Widget | Displays |
