@@ -1,26 +1,22 @@
-# Test status and manual validation
+# Testing and compatibility
 
-**Static package validation:** `python tests/test_package.py` checks the manifest, paths, translations, catalog, and basic source expectations. It is not a Luau compiler or an in-shell test.
+## Automated checks
 
-**Live testing:** The author confirmed the plugin appeared in `noctalia msg plugins list`, was enabled, and the Storage widget worked after configuring its additional mount on CachyOS (2026-10-27). This is an informal live smoke test, not an exhaustive compatibility certificate. Exact Noctalia build number was not recorded.
+Run `python tests/test_package.py` from the repository root. The script checks the plugin manifest, file paths, translations, catalog consistency and source invariants. It is a **static package check**, not a Luau compiler or a live shell integration test.
 
-## Adaptive palette QA for v0.1.1
+## Local smoke test (2026-10-27)
 
-1. Switch to a contrasting built-in/community palette; confirm all four cards recolor without restarting them.
-2. Toggle light/dark shell mode; check text contrast against the translucent backgrounds.
-3. Set Noctalia's theme source to `wallpaper`, then change wallpapers. Verify the cards follow its generated palette. If wallpaper mode is not selected, the cards should instead follow the active selected palette.
-4. Confirm the cards' widths, padding, titles, event list, and second storage mount persist.
-5. Never modify shell theme settings from the plugin; record a sanitized screenshot and Noctalia version if a card does not repaint.
+The plugin was recognized and enabled in Noctalia on CachyOS with Umbriel. The optional second storage mount was configured successfully. The v0.1.1 adaptive-color update was subsequently installed locally and reported to work with the active Noctalia palette.
 
-Static source tests cannot prove runtime repaint or accessibility contrast, so live validation is required before a stable release.
+These observations confirm a successful initial setup, not broad compatibility. The exact Noctalia build number and a full matrix of theme, hardware and calendar edge cases were not recorded.
 
-## Before calling this stable
+## Recommended manual tests
 
-1. Calendar: empty, unsynced, 1, 2 and 3+ events; all-day events, multiple accounts, time zone changes, next-day rollover.
-2. System: sensor unavailable, disabled monitor, missing GPU, CPU/RAM load spikes.
-3. Network: offline/no interface, bandwidth bursts, and reconnect.
-4. Storage: missing/unmounted extra mount, root-only behavior, zero-sized/invalid stats.
-5. Settings, layouts and migrations: plugin disabled/enabled, different monitor resolutions, widget move/resize, Noctalia upgrades and source updates.
-6. Review screenshots carefully: remove real calendar event contents and any private mount/device information before publishing.
+1. **Calendar:** unsynced, zero, one, two and three or more events; all-day events; multiple accounts; time zone changes and midnight rollover.
+2. **System:** unavailable sensors, missing GPU, disabled monitor and fluctuating usage.
+3. **Network:** offline state, reconnect, idle traffic and sustained transfer.
+4. **Storage:** root-only configuration, optional mount present/missing, invalid or unmounted paths and low free space.
+5. **Adaptive theme:** contrasting built-in/community palettes, wallpaper-derived palettes, light and dark modes, text contrast and repaint without restarting.
+6. **Lifecycle:** widget add/remove, plugin disable/enable, clean Git-source installation, multiple screen sizes and Noctalia upgrades.
 
-User-reported live behavior may differ from source static checks. Please file bugs with Noctalia version, widget name, reproduction steps, and sanitized logs; never post credentials.
+Avoid including real event details, credentials, email addresses or other private data in bug reports and screenshots. When reporting an issue, include a sanitized screenshot, the Noctalia version and clear reproduction steps.
