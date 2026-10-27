@@ -1,18 +1,19 @@
 # Changelog
 
-## 0.1.1 — adaptive palette beta (unreleased)
+## 0.1.1 — adaptive palette beta (2026-10-27)
 
-- Removed all hard-coded widget colors. Calendar, System, Network, and Storage now use Noctalia's live palette-role tokens.
-- Widget backgrounds retain translucency via `surface/0.88`; labels, separators, borders, and metric accents respond to the active palette, including wallpaper-derived palettes when selected in Noctalia.
-- There is no Original mode, theme selector, or new plugin setting. The widget automatically follows the shell palette.
-- Kept `plugin_api = 37`, widget layout, calendar behavior, storage configuration, and Dotprofile untouched.
-- Live light/dark and wallpaper palette testing is still pending; don't label as stable until tested on the desktop.
+- Replaced fixed widget colors with Noctalia palette-role tokens across Calendar, System, Network and Storage.
+- Retained translucent surfaces via `surface/0.88`, with themed text, borders, dividers, accents and progress tracks.
+- Widgets follow the active Noctalia theme, including wallpaper-derived palettes when that theme source is enabled.
+- No appearance toggle, extra dependency or change to shell theme settings.
+- Preserved widget layouts, existing settings and plugin API 37.
+- Adaptive palette behavior smoke-tested on CachyOS with Umbriel and Noctalia; broader compatibility and contrast testing remain open.
 
 ## 0.1.0 — initial beta (2026-10-27)
 
-- Introduces four separately placeable desktop widgets: Calendar, System, Network, Storage.
-- Calendar shows at most two upcoming events in a seven-day window plus an overflow counter; provider label is configurable without storing credentials.
-- System and Network display Noctalia-provided statistics; Storage displays root and an optional additional absolute mount.
-- Unnumbered panel headings, compact monospaced presentation and dark translucent cards.
-- Initial local smoke test reported successful on the author's CachyOS desktop; broader compatibility and edge cases remain untested.
-- No changes to Umbriel, Dotprofile, autostart, authentication, keybindings, or existing plugins.
+- Added four independently placeable Noctalia desktop widgets: Calendar, System, Network and Storage.
+- Calendar displays up to two upcoming events within seven days, followed by an overflow counter, with a configurable provider label.
+- System and Network use Noctalia-provided metrics. Storage shows the root filesystem and an optional additional mount.
+- Added compact monospaced layouts, translucent cards and unnumbered titles.
+- Initial local smoke test completed on CachyOS; further hardware and calendar edge-case testing remains.
+- No changes to Umbriel, Dotprofile, autostart, authentication, keybindings or other plugins.
