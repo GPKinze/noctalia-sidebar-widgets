@@ -6,13 +6,13 @@ A collection of four compact, independently placeable desktop widgets for **Noct
 
 ## Screenshots
 
-Three desktop examples showing the same four widgets with different Noctalia palettes. **Calendar entries in these screenshots are sample data**; private event details have been replaced.
+Three desktop screenshots showing the four sidebar widgets with different Noctalia palettes. These are the original PNG screenshots, unchanged.
 
-| Warm · Sunset | Cool · Mountains | Green · City |
+| Sunset | Mountains | City |
 | :---: | :---: | :---: |
-| [![Sunset palette preview](screenshots/adaptive-sunset-preview.webp)](screenshots/adaptive-sunset.webp) | [![Mountain palette preview](screenshots/adaptive-mountains-preview.webp)](screenshots/adaptive-mountains.webp) | [![Green city palette preview](screenshots/adaptive-city-preview.webp)](screenshots/adaptive-city.webp) |
+| [![Sidebar widgets with warm sunset palette](screenshots/Screenshot-2026-10-27_17-07-10.png)](screenshots/Screenshot-2026-10-27_17-07-10.png) | [![Sidebar widgets with cool mountain palette](screenshots/Screenshot-2026-10-27_17-06-59.png)](screenshots/Screenshot-2026-10-27_17-06-59.png) | [![Sidebar widgets with green-themed city palette](screenshots/Screenshot-2026-10-27_16-41-10.png)](screenshots/Screenshot-2026-10-27_16-41-10.png) |
 
-Select a preview to view the full desktop screenshot. Wallpapers are shown for illustration and are not distributed separately by this plugin.
+Select a screenshot to view the full-resolution desktop. Wallpapers are for demonstration and are not distributed separately.
 
 ## Widgets
 
