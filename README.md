@@ -1,83 +1,87 @@
 # Noctalia Sidebar Widgets
 
-Four independent, compact desktop panels inspired by the author's Umbriel + Noctalia sidebar: **Calendar**, **System**, **Network**, and **Storage**. Each has an unnumbered title so panels can be arranged in any order.
+A collection of four compact, independently placeable desktop widgets for **Noctalia v5**: **Calendar**, **System**, **Network**, and **Storage**. Built for a minimal sidebar layout, but the widgets can be positioned separately.
 
-> **v0.1.1 beta (adaptive palette).** This is a new Noctalia **v5 Luau** implementation inspired by the author's original sidebar screenshot, not a recovered copy of the original widgets. The author reported a successful initial live run on CachyOS, including configuring the second storage mount. Broader hardware, calendar edge-case, and version compatibility testing are still pending. Treat this as beta software.
+**Current release:** [v0.1.1-beta](https://github.com/GPKinze/noctalia-sidebar-widgets/releases/tag/v0.1.1-beta). Smoke-tested on CachyOS with Umbriel and Noctalia. Other hardware and Noctalia builds have not been fully tested.
 
-## What it does
+## Widgets
 
-- Calendar: large date, weekday, month, next seven days; displays **two** event rows maximum plus `+N more upcoming events`, using Noctalia's already-synced calendar (no direct Google login or network calls).
-- System: CPU, GPU, RAM from Noctalia's system monitor. GPU shows `N/A` when probing is unavailable.
-- Network: receive/transmit rates from Noctalia's monitor, with suitable binary units.
-- Storage: root filesystem plus an **optional** second user-configured mount, usage and available GiB.
+| Widget | Displays |
+| --- | --- |
+| **Calendar** | Date, weekday, month and up to two events in the next seven days, with a counter for additional events |
+| **System** | CPU, GPU and RAM usage; unavailable GPU metrics show `N/A` |
+| **Network** | Download and upload speeds |
+| **Storage** | Usage and available capacity for the root filesystem and an optional second mount |
 
-Each card is a separate `[[desktop_widget]]` entry, so you can place, move or hide them independently. Dimensions and visual spacing are approximate and meant to be tuned against the live original.
+Each panel has its own `[[desktop_widget]]` entry and an unnumbered title.
 
-## Appearance: always adaptive
+## Adaptive colors
 
-**No appearance toggle or fixed-color theme.** All four cards use Noctalia palette-role tokens for text, accents, borders, progress tracks and a translucent background (`surface/0.88`). Noctalia resolves these tokens live against the active shell theme, so the cards follow light/dark changes and palette changes without extra scripts, settings, or a restart. If **Noctalia's theme source is set to wallpaper**, changing the wallpaper changes the palette and therefore the widget colors. If the active theme source is builtin, community, or custom, the widgets follow that palette instead; they do not extract colors from wallpapers on their own. The cards retain their original dimensions and overall hierarchy, but the accent color may no longer be teal.
+All four widgets automatically follow **Noctalia's active color palette**. Colors update with the shell's light/dark mode and theme. When Noctalia is set to use wallpaper-derived colors, they also follow wallpaper palette changes.
 
-This uses existing `plugin_api = 37` capabilities and intentionally avoids palette roles introduced in API 43. No changes to your shell's theme settings are performed by the plugin.
+The translucent background uses `surface/0.88`. Text, borders, dividers, progress tracks and accents use palette-role tokens. There is no separate theme mode or fixed-color fallback, and this plugin does not change Noctalia's own theme settings.
 
 ## Requirements
 
-- Noctalia v5+ with **plugin API 37 or later** (calendarEvents API). These are *not* legacy QML/Quickshell or DankMaterialShell widgets.
-- Noctalia calendar accounts synced if you want events displayed. Google authorization remains inside the Noctalia calendar service.
-- Noctalia system monitor enabled for system/network/storage metrics; sensor availability is hardware-dependent.
+- Noctalia v5 with plugin API **37 or later**.
+- Noctalia calendar integration configured and synced if you want upcoming events.
+- Noctalia system monitoring available for system, network and disk metrics. Some sensors may be unavailable on certain hardware.
 
-## Sharing from a Git repository
+This is a Noctalia **Luau** plugin, not a legacy QML widget.
 
-After this repository is published, users can add it as a plugin source:
+## Install from GitHub
+
+Add this public repository as a Git plugin source:
 
 ```sh
 noctalia msg plugins source add sidebar-widgets git https://github.com/GPKinze/noctalia-sidebar-widgets.git
 noctalia msg plugins enable gpkinze/sidebar-widgets
 ```
 
-These commands work only once this GitHub repository is public. **If you have an older local copy under `~/.local/share/noctalia/plugins/sidebar-widgets/`, that copy takes precedence over the Git source.** Disable and archive the local copy before testing Git-based updates, and only after confirming the public copy is available.
+**Note:** A local copy at `~/.local/share/noctalia/plugins/sidebar-widgets/` takes precedence over a Git-sourced copy of the same plugin. If you previously installed it manually, back up the local directory before changing sources. Installation from the public Git source still needs clean-environment testing.
 
-## Safe test installation (does not overwrite your configuration)
+### Add the widgets
 
-1. Make sure you already have a desktop with Noctalia v5 and save any important settings.
-2. Copy **only the `sidebar-widgets/` directory** into `~/.local/share/noctalia/plugins/sidebar-widgets/` (or use a development path source).
-3. Enable the plugin:
-
-   ```sh
-   noctalia msg plugins enable gpkinze/sidebar-widgets
-   ```
-
-4. Open **Noctalia Settings → Desktop → Toggle Editor** and add the plugin desktop-widget entries `gpkinze/sidebar-widgets:calendar`, `gpkinze/sidebar-widgets:system`, `gpkinze/sidebar-widgets:network`, and `gpkinze/sidebar-widgets:storage`. Position them as a vertical stack. The editor can be toggled with:
+1. Open **Noctalia Settings → Desktop → Toggle Editor**, or run:
 
    ```sh
    noctalia msg desktop-widgets-edit
    ```
 
-   The exact picker wording may vary between Noctalia builds. Desktop widgets are managed through Noctalia's existing editor; this package does not edit `config.toml` or `settings.toml`.
+2. Add any of these plugin widgets:
+   - `gpkinze/sidebar-widgets:calendar`
+   - `gpkinze/sidebar-widgets:system`
+   - `gpkinze/sidebar-widgets:network`
+   - `gpkinze/sidebar-widgets:storage`
+3. Position each widget wherever you prefer.
 
-5. Under **Settings → Plugins → Sidebar Widgets**, optionally set a storage mount (such as `/mnt/Storage`) and the calendar provider text (`Google` by default). Never enter a credential here.
+Exact names in the picker may vary by Noctalia version.
+
+### Settings
+
+Under **Noctalia Settings → Plugins → Sidebar Widgets**, you can change:
+
+- **Calendar provider label:** defaults to `Google`. This is display text, not a login.
+- **Additional storage mount:** optional absolute mount path, such as `/mnt/Storage`.
+
+The calendar uses Noctalia's existing synced events; no Google credentials or API tokens are required by this plugin.
 
 ## Uninstall
 
-Remove the four desktop widget instances through the editor, disable the plugin with `noctalia msg plugins disable gpkinze/sidebar-widgets`, and remove its locally copied plugin directory if desired. This package creates no services, hooks, autostart, compositor keybindings, or persistent files.
+Remove the desktop widget instances using Noctalia's editor and disable the plugin:
 
-## Compatibility and privacy
+```sh
+noctalia msg plugins disable gpkinze/sidebar-widgets
+```
 
-- Developed to the [official Noctalia plugin manifest](https://docs.noctalia.dev/noctalia/plugins/development/manifest/), [desktop UI API](https://docs.noctalia.dev/noctalia/plugins/development/declarative-ui/), and [runtime API](https://docs.noctalia.dev/noctalia/plugins/development/runtime-api/).
-- Works through Noctalia's APIs: no `curl`, `nvidia-smi`, `/proc` parsing, or Google API keys. No external commands or network calls from this plugin.
-- The label below events is a **configurable provider name**, not an email address; event titles are read in memory from the shell and are not logged or stored.
-- All display data is local to the user session. This repository does not contain private calendar events, actual screenshots with event titles, tokens, machine paths, or exported Noctalia settings.
-- `gruvbox-kanji` stays in the separate Dotprofile repository. The Island, DMS, and Cava are not part of this repo.
+If you installed it manually, you may then remove your local plugin copy. The plugin does not configure autostart, compositor keybindings, authentication or user hooks.
 
-## Beta test coverage still needed
+## Status and compatibility
 
-- [ ] Verify live palette repaint (switch built-in/community palettes, wallpaper-derived palettes, and light/dark mode) and text contrast.
-- [ ] Test the four desktop entries on your live Noctalia version in a separate desktop layout.
-- [ ] Compare geometry, opacity, typefaces and spacing to the original sidebar.
-- [ ] Test calendar counts for 0/1/2/3+ events, all-day events, sync-not-ready and timezone transition.
-- [ ] Test no GPU probe, monitor disabled, missing removable storage, reconnect/network idle.
-- [ ] Confirm browser/UI label for the desktop picker, and update steps accordingly.
-- [ ] Publish a screenshot with **sample events only** and run the privacy checklist.
+This is **beta software**. The local CachyOS setup has been smoke-tested, including the optional storage mount and adaptive palette behavior. Calendar edge cases, missing hardware sensors, clean Git-source installation and other Noctalia versions remain to be verified. See [Testing](docs/TESTING.md).
 
-See `docs/RELEASE.md` for publishing instructions, `docs/TESTING.md` for test expectations, and `docs/MIGRATION.md` for the original-source distinction.
+The implementation uses Noctalia's [manifest](https://docs.noctalia.dev/noctalia/plugins/development/manifest/), [declarative UI](https://docs.noctalia.dev/noctalia/plugins/development/declarative-ui/) and [runtime](https://docs.noctalia.dev/noctalia/plugins/development/runtime-api/) APIs. It does not spawn monitoring tools or make its own network requests.
 
-Independent community work; not an official Noctalia or Umbriel project.
+For contributors: see the [changelog](CHANGELOG.md), [release checklist](docs/RELEASE.md) and [migration notes](docs/MIGRATION.md). Please avoid including real event details, credentials or private paths in issues and screenshots.
+
+This is an independent community project and is not officially affiliated with Noctalia or Umbriel. Licensed under [MIT](LICENSE).
