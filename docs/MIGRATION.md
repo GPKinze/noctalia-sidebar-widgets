@@ -1,16 +1,20 @@
-# Original sidebar source migration
+# Sidebar widget implementation notes
 
-This release is a **new v5 preview** based on the reference screenshot. It does not contain or recover the original custom widget code stored on the user's CachyOS PC.
+The current `sidebar-widgets/` directory contains a **Noctalia v5 Luau implementation** of four desktop widgets. It is not a byte-for-byte export of the earlier personalized sidebar configuration.
 
-To preserve the *exact* original rather than merely approximate the look, first locate its source **on the live machine**, then make a read-only copy after careful review. No automatic scanning/upload is provided; automatic uploads can expose calendar data, credentials and private paths.
+For anyone migrating an existing custom sidebar, review its source and settings before replacing it. Preserve a backup of the working plugin and check for local dependencies or version-specific APIs.
 
-Suggested safe starting commands, run locally:
+## Inspect an existing installation
+
+These read-only commands can help locate source files:
 
 ```sh
 find ~/.config/noctalia ~/.local/share/noctalia -type f \
   \( -name '*.luau' -o -name '*.qml' -o -name 'plugin.toml' \) 2>/dev/null
 ```
 
-If the sidebar came from a DMS extension, inspect its location separately rather than mixing in the experimental Island. Avoid dumping all files to chat or GitHub: review first, and share only the exact custom widget source with event details and credentials removed.
+Keep implementation files separate from runtime state. Never commit real calendar events, credentials, access tokens, private settings or machine-specific paths.
 
-Compare original source and `sidebar-widgets/{calendar,system,network,storage}.luau` function-by-function, then port only what was author-written and compatible with Noctalia's public plugin API. Commit source imports to a separate branch for review.
+If you adapt an earlier implementation, compare its behavior with the current Calendar, System, Network and Storage widgets, verify compatibility with the active Noctalia API, and submit the proposed changes through a separate branch or pull request.
+
+This repository does not include a desktop configuration migration tool.
