@@ -1,0 +1,37 @@
+id          = "gpkinze/sidebar-widgets"
+name        = "Sidebar Widgets"
+version     = "0.1.0"
+plugin_api  = 37
+author      = "GPKinze"
+license     = "MIT"
+icon        = "layout-sidebar-left"
+description = "Compact calendar, system, network and storage desktop widgets."
+tags        = ["desktop", "system", "network", "productivity"]
+
+[[setting]]
+key       = "calendar_label"
+type      = "string"
+label_key = "settings.calendar_label.label"
+default   = "Google"
+
+[[setting]]
+key       = "storage_path"
+type      = "string"
+label_key = "settings.storage_path.label"
+default   = ""
+
+[[desktop_widget]]
+id    = "calendar"
+entry = "calendar.luau"
+
+[[desktop_widget]]
+id    = "system"
+entry = "system.luau"
+
+[[desktop_widget]]
+id    = "network"
+entry = "network.luau"
+
+[[desktop_widget]]
+id    = "storage"
+entry = "storage.luau"

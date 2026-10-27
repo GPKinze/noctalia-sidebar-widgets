@@ -1,0 +1,14 @@
+.DS_Store
+*.swp
+*.log
+.env
+.env.*
+*secret*
+*credentials*
+*token*
+*.key
+*.pem
+private/
+local-only/
+noctalia.d.luau
+__pycache__/

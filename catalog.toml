@@ -1,0 +1,10 @@
+[[plugin]]
+id          = "gpkinze/sidebar-widgets"
+name        = "Sidebar Widgets"
+version     = "0.1.0"
+plugin_api  = 37
+author      = "GPKinze"
+license     = "MIT"
+icon        = "layout-sidebar-left"
+description = "Compact calendar, system, network and storage desktop widgets."
+tags        = ["desktop", "system", "network", "productivity"]
