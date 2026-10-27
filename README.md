@@ -2,7 +2,7 @@
 
 Four independent, compact desktop panels inspired by the author's Umbriel + Noctalia sidebar: **Calendar**, **System**, **Network**, and **Storage**. Each has an unnumbered title so panels can be arranged in any order.
 
-> **v0.1.0 beta.** This is a new Noctalia **v5 Luau** implementation inspired by the author's original sidebar screenshot, not a recovered copy of the original widgets. The author reported a successful initial live run on CachyOS, including configuring the second storage mount. Broader hardware, calendar edge-case, and version compatibility testing are still pending. Treat this as beta software.
+> **v0.1.1 beta (adaptive palette).** This is a new Noctalia **v5 Luau** implementation inspired by the author's original sidebar screenshot, not a recovered copy of the original widgets. The author reported a successful initial live run on CachyOS, including configuring the second storage mount. Broader hardware, calendar edge-case, and version compatibility testing are still pending. Treat this as beta software.
 
 ## What it does
 
@@ -12,6 +12,12 @@ Four independent, compact desktop panels inspired by the author's Umbriel + Noct
 - Storage: root filesystem plus an **optional** second user-configured mount, usage and available GiB.
 
 Each card is a separate `[[desktop_widget]]` entry, so you can place, move or hide them independently. Dimensions and visual spacing are approximate and meant to be tuned against the live original.
+
+## Appearance: always adaptive
+
+**No appearance toggle or fixed-color theme.** All four cards use Noctalia palette-role tokens for text, accents, borders, progress tracks and a translucent background (`surface/0.88`). Noctalia resolves these tokens live against the active shell theme, so the cards follow light/dark changes and palette changes without extra scripts, settings, or a restart. If **Noctalia's theme source is set to wallpaper**, changing the wallpaper changes the palette and therefore the widget colors. If the active theme source is builtin, community, or custom, the widgets follow that palette instead; they do not extract colors from wallpapers on their own. The cards retain their original dimensions and overall hierarchy, but the accent color may no longer be teal.
+
+This uses existing `plugin_api = 37` capabilities and intentionally avoids palette roles introduced in API 43. No changes to your shell's theme settings are performed by the plugin.
 
 ## Requirements
 
@@ -64,6 +70,7 @@ Remove the four desktop widget instances through the editor, disable the plugin 
 
 ## Beta test coverage still needed
 
+- [ ] Verify live palette repaint (switch built-in/community palettes, wallpaper-derived palettes, and light/dark mode) and text contrast.
 - [ ] Test the four desktop entries on your live Noctalia version in a separate desktop layout.
 - [ ] Compare geometry, opacity, typefaces and spacing to the original sidebar.
 - [ ] Test calendar counts for 0/1/2/3+ events, all-day events, sync-not-ready and timezone transition.

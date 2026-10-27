@@ -1,6 +1,6 @@
 id          = "gpkinze/sidebar-widgets"
 name        = "Sidebar Widgets"
-version     = "0.1.0"
+version     = "0.1.1"
 plugin_api  = 37
 author      = "GPKinze"
 license     = "MIT"

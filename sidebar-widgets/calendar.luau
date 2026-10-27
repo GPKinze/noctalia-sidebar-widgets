@@ -3,10 +3,13 @@
 
 local WIDTH = 258
 local INNER = 226
-local WHITE = "#dee0dc"
-local MUTED = "#b1bab7"
-local TEAL = "#48d6c4"
-local BACK = "#101514e0"
+-- Palette roles are resolved live by Noctalia. No fixed-color mode.
+local WHITE = "on_surface"
+local MUTED = "on_surface_variant"
+local TEAL = "primary"
+local BACK = "surface/0.88"
+local BORDER = "on_surface_variant/0.22"
+local SEPARATOR = "on_surface_variant/0.28"
 local WEEK_MS = 7 * 24 * 60 * 60 * 1000
 
 local function label(text, size, color, weight)
@@ -79,7 +82,7 @@ function update()
                 label(os.date("%B %Y"), 11, MUTED),
             }),
         }),
-        ui.separator({ color = "#39413e", thickness = 1, spacing = 4 }),
+        ui.separator({ color = SEPARATOR, thickness = 1, spacing = 4 }),
         ui.row({ justify = "space_between", width = INNER }, {
             label("UPCOMING EVENTS", 10, MUTED, "bold"),
             label("NEXT 7 DAYS", 10, MUTED),
@@ -101,5 +104,5 @@ function update()
         end
     end
     desktopWidget.render(ui.column({ width = WIDTH, gap = 12, padding = 16,
-        fill = BACK, radius = 16, border = "#4c5d554a", borderWidth = 1 }, children))
+        fill = BACK, radius = 16, border = BORDER, borderWidth = 1 }, children))
 end

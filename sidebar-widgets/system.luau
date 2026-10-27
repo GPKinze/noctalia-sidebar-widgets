@@ -1,8 +1,10 @@
 --!nonstrict
 -- Uses Noctalia system monitor snapshots; hardware probes may be unavailable.
 local WIDTH, INNER = 258, 226
-local WHITE, MUTED = "#dee0dc", "#b1bab7"
-local TEAL, TRACK, BACK = "#48d6c4", "#414643", "#101514e0"
+-- Keep every color tied to the active Noctalia palette.
+local WHITE, MUTED = "on_surface", "on_surface_variant"
+local TEAL, TRACK, BACK = "primary", "on_surface_variant/0.24", "surface/0.88"
+local BORDER = "on_surface_variant/0.22"
 
 local function label(text, color, size)
     return ui.label({ text = text, color = color or WHITE, fontSize = size or 11,
@@ -27,10 +29,10 @@ function update()
     local gpu = stats and stats.gpu and stats.gpu.usagePercent or nil
     local ram = stats and stats.ram and stats.ram.usagePercent or nil
     desktopWidget.render(ui.column({ width = WIDTH, gap = 11, padding = 16,
-        fill = BACK, radius = 16, border = "#4c5d554a", borderWidth = 1 }, {
+        fill = BACK, radius = 16, border = BORDER, borderWidth = 1 }, {
         label("SYSTEM", MUTED, 11),
         metric("CPU", cpu, TEAL),
-        metric("GPU", gpu, "#6da29e"),
-        metric("RAM", ram, "#c8d5d0"),
+        metric("GPU", gpu, "secondary"),
+        metric("RAM", ram, "tertiary"),
     }))
 end

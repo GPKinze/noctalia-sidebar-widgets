@@ -1,8 +1,10 @@
 --!nonstrict
 -- Read-only usage for / and an optional user-configured mount.
 local WIDTH, INNER = 258, 226
-local WHITE, MUTED = "#dee0dc", "#b1bab7"
-local TEAL, TRACK, BACK = "#48d6c4", "#414643", "#101514e0"
+-- All widget colors follow the active Noctalia palette live.
+local WHITE, MUTED = "on_surface", "on_surface_variant"
+local TEAL, TRACK, BACK = "primary", "on_surface_variant/0.24", "surface/0.88"
+local BORDER = "on_surface_variant/0.22"
 
 local function text(value, color, size)
     return ui.label({ text = value, color = color or WHITE, fontSize = size or 11,
@@ -38,5 +40,5 @@ function update()
         table.insert(rows, text("Set additional mount in plugin settings", MUTED, 10))
     end
     desktopWidget.render(ui.column({ width = WIDTH, gap = 13, padding = 16,
-        fill = BACK, radius = 16, border = "#4c5d554a", borderWidth = 1 }, rows))
+        fill = BACK, radius = 16, border = BORDER, borderWidth = 1 }, rows))
 end
