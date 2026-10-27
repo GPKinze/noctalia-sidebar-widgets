@@ -4,6 +4,16 @@ A collection of four compact, independently placeable desktop widgets for **Noct
 
 **Current release:** [v0.1.1-beta](https://github.com/GPKinze/noctalia-sidebar-widgets/releases/tag/v0.1.1-beta). Smoke-tested on CachyOS with Umbriel and Noctalia. Other hardware and Noctalia builds have not been fully tested.
 
+## Screenshots
+
+Three desktop examples showing the same four widgets with different Noctalia palettes. **Calendar entries in these screenshots are sample data**; private event details have been replaced.
+
+| Warm · Sunset | Cool · Mountains | Green · City |
+| :---: | :---: | :---: |
+| [![Sunset palette preview](screenshots/adaptive-sunset-preview.webp)](screenshots/adaptive-sunset.webp) | [![Mountain palette preview](screenshots/adaptive-mountains-preview.webp)](screenshots/adaptive-mountains.webp) | [![Green city palette preview](screenshots/adaptive-city-preview.webp)](screenshots/adaptive-city.webp) |
+
+Select a preview to view the full desktop screenshot. Wallpapers are shown for illustration and are not distributed separately by this plugin.
+
 ## Widgets
 
 | Widget | Displays |
