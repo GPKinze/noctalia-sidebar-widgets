@@ -1,5 +1,6 @@
 """Static checks only. Live Noctalia/Luau UI behavior remains to be tested."""
 import json
+import re
 from pathlib import Path
 import tomllib
 
@@ -18,6 +19,17 @@ for title, path in entries.items():
     assert "noctalia.setUpdateInterval" in source
     assert f'"{title.upper()}"' in source
     assert not any(f'"{n:02d} / {title.upper()}"' in source for n in range(1, 5))
+# Palette-role tokens, including /alpha, must remain live and theme-driven.
+# Static tests cannot assert visual contrast or real shell repaint behavior.
+for entry in entries.values():
+    source = (plugin / entry).read_text()
+    assert not re.search(r"#[0-9a-fA-F]{3,8}\\b", source), entry
+    assert '"on_surface"' in source, entry
+    assert '"on_surface_variant"' in source, entry
+    assert '"primary"' in source, entry
+    assert '"surface/0.88"' in source, entry
+    assert '"on_surface_variant/0.22"' in source, entry
+assert not any(row["key"] == "appearance_mode" for row in manifest["setting"])
 assert "calendarEvents()" in (plugin / "calendar.luau").read_text()
 assert "more upcoming events" in (plugin / "calendar.luau").read_text()
 assert "net.rxBytesPerSec" in (plugin / "network.luau").read_text()
